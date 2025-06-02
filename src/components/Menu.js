@@ -18,6 +18,14 @@ const Menu = ({ children }) => {
           <Link to="/deposit" style={styles.link} onClick={closeMenu}>Deposit</Link>
           <Link to="/withdraw" style={styles.link} onClick={closeMenu}>Withdraw</Link>
           <Link to="/login" style={styles.link} onClick={closeMenu}>Logout</Link>
+          <Link to="/signup" style={styles.link} onClick={closeMenu}>Signup</Link>
+          <Link to="/login" style={styles.link} onClick={closeMenu}>Login</Link>
+          <Link to="/profile" style={styles.link} onClick={closeMenu}>Profile</Link>
+          <Link to="/history" style={styles.link} onClick={closeMenu}>History</Link>
+          <Link to="/settings" style={styles.link} onClick={closeMenu}>Settings</Link>
+
+
+
         </nav>
       </div>
 

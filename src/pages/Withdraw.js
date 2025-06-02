@@ -37,7 +37,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    background: "linear-gradient(to right, #141e30, #243b55)",
+    background:"linear-gradient(135deg, #000000 30%, #1a1a1a 50%, #f35525 100%)",
     padding: "0px",
   },
   card: {
@@ -89,7 +89,7 @@ const styles = {
   },
   button: {
     padding: "12px",
-    backgroundColor: "#1e90ff",
+    backgroundColor: "#f35525",
     color: "#fff",
     border: "none",
     borderRadius: "6px",

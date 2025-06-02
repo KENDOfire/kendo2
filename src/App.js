@@ -5,6 +5,9 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Withdraw from "./pages/Withdraw";
+import Profile from "./pages/Profile";
+import History from "./pages/History";
+import Settings from "./pages/Settings";
 
 
 
@@ -18,6 +21,10 @@ export default function App() {
         | <Link to="/login">Login</Link>
         | <Link to="/dashboard">Dashboard</Link>
         | <Link to="/withdraw">Withdraw</Link>
+        | <Link to="/profile">Profile</Link>
+        | <Link to="/history">History</Link>
+        | <Link to="/settings">Settings</Link>
+
         
         
       </nav>
@@ -29,6 +36,10 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/withdraw" element={<Withdraw />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/settings" element={<Settings />} />
+
         
         {/* Add more routes as needed */}
         <Route path="*" element={<h1>404 Not Found</h1>} />

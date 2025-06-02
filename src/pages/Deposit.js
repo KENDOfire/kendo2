@@ -1,6 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
+import { useNavigate } from "react-router-dom";
+
 
 const Deposit = () => {
   const navigate = useNavigate();
