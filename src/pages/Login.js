@@ -18,7 +18,7 @@ const Login = () => {
           <button type="submit" style={styles.button}>Login</button>
         </form>
         <p style={styles.disclaimer}>
-          Don't have an account? <a href="#">Sign up</a>
+          Don't have an account? <a href="/signup">Sign up</a>
         </p>
       </div>
     </div>
@@ -77,7 +77,7 @@ const styles = {
   button: {
     padding: "12px",
     fontSize: "16px",
-    backgroundColor: "#0d6efd",
+    backgroundColor: "#f35525",
     color: "#fff",
     border: "none",
     borderRadius: "6px",

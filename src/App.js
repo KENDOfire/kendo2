@@ -4,36 +4,34 @@ import Deposit from "./pages/Deposit";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Withdraw from "./pages/Withdraw";
 
-function Home() {
-  return <h2>Home Page</h2>;
-}
-function About() {
-  return <h2>About Page</h2>;
-}
+
 
 export default function App() {
   return (
-    <Router>
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About</Link>
+    <Router >
+      <nav  style={{ padding: "10px", backgroundColor: "#f0f0f0", textAlign: "center",display:"none" }}>
+       
         | <Link to="/deposit">Deposit</Link>
         | <Link to="/signup">Signup</Link>
         | <Link to="/login">Login</Link>
         | <Link to="/dashboard">Dashboard</Link>
+        | <Link to="/withdraw">Withdraw</Link>
         
-
-        <Link to="/deposit">Deposit</Link>
         
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/" element={<Dashboard />} />
+        
         <Route path="/deposit" element={<Deposit />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/withdraw" element={<Withdraw />} />
+        
+        {/* Add more routes as needed */}
+        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>
   );

@@ -1,8 +1,14 @@
 import React from "react";
+import Menu from "../components/Menu";
 
 const Dashboard = () => {
   return (
+           <Menu>
+
+ 
+  
     <div style={styles.container}>
+          
       <div style={styles.header}>
         <h2 style={styles.title}>Dashboard</h2>
         <p style={styles.subtitle}>Welcome back! Here's an overview of your crypto portfolio.</p>
@@ -27,6 +33,8 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+  
+     </Menu>
   );
 };
 

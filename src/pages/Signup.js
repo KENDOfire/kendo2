@@ -22,7 +22,7 @@ const Signup = () => {
           <button type="submit" style={styles.button}>Sign Up</button>
         </form>
         <p style={styles.disclaimer}>
-          By signing up, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+          By signing up, you agree to our <a href="#">Terms</a> and <a href="https://kendo344.vercel.app">Privacy Policy</a>.
         </p>
       </div>
     </div>

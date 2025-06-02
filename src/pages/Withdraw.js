@@ -1,7 +1,9 @@
 import React from "react";
+import Menu from "../components/Menu";
 
 const Withdraw = () => {
   return (
+    <Menu>
     <div style={styles.container}>
       <div style={styles.card}>
         <h2 style={styles.title}>Withdraw Funds</h2>
@@ -25,6 +27,7 @@ const Withdraw = () => {
         </form>
       </div>
     </div>
+    </Menu>
   );
 };
 
@@ -35,7 +38,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     background: "linear-gradient(to right, #141e30, #243b55)",
-    padding: "20px",
+    padding: "0px",
   },
   card: {
     backgroundColor: "#ffffff",
