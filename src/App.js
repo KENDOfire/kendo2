@@ -8,6 +8,7 @@ import Withdraw from "./pages/Withdraw";
 import Profile from "./pages/Profile";
 import History from "./pages/History";
 import Settings from "./pages/Settings";
+import Codevalidation from "./pages/Codevalidation";
 
 
 
@@ -24,6 +25,7 @@ export default function App() {
         | <Link to="/profile">Profile</Link>
         | <Link to="/history">History</Link>
         | <Link to="/settings">Settings</Link>
+        | <Link to="/codevalidation">Code Validation</Link>
 
         
         
@@ -39,6 +41,7 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/codevalidation" element={<Codevalidation />} />
 
         
         {/* Add more routes as needed */}

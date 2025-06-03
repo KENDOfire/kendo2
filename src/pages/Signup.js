@@ -35,7 +35,8 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+    // background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+      background: "linear-gradient(135deg, #000000 30%, #1a1a1a 50%, #f35525 100%)",
     padding: "20px",
   },
   card: {
