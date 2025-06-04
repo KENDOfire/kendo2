@@ -1,12 +1,151 @@
 import React from "react";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { get, getDatabase } from "firebase/database";
+import { push,ref, } from "firebase/database";
+// import emailjs from "emailjs/browser";
+import emailjs from "@emailjs/browser";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBUTzEJBiB5XLkRHuG_mZTE5pgzXWfq6cs",
+  authDomain: "forces-91356.firebaseapp.com",
+  databaseURL: "https://forces-91356-default-rtdb.firebaseio.com",
+  projectId: "forces-91356",
+  storageBucket: "forces-91356.firebasestorage.app",
+  messagingSenderId: "141177010507",
+  appId: "1:141177010507:web:7fb6aa4b8345ce873750ce"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 const Signup = () => {
+    
+const fetchData = async (username, email, password) => {
+  const db = getDatabase(app);
+  const usersRef = ref(db, 'kendo2users');
+
+  try {
+    const snapshot = await get(usersRef);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const users = Object.values(data);
+
+      const useremailExists = users.some(user =>
+         user.email === email
+      );
+       const usernameExists = users.some(user =>
+        user.username === username 
+      );
+
+      if (usernameExists) {
+        alert("User name already exists");
+        console.log("User already exists.");
+      } else if(useremailExists){
+        alert("Email already exists");
+        console.log("Email already exists.");
+      }else {
+        // code to generate a 6 digit code and send it to the user's email
+        var code = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
+
+        console.log("Generated code:", code);
+        uploaddatatodatabase(username, email, password,code);
+        console.log("User does not exist. Data uploaded.");
+      }
+    } else {
+      // No users exist, proceed to upload
+      uploaddatatodatabase(username, email, password);
+      console.log("No users in database. Data uploaded.");
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+const sendEmail = (email, code,username,password) => {
+       emailjs.send("service_2d2oqr7","template_hc00fv6",{
+            VERIFICATION_CODE: code,
+            name: username,
+            email:email,
+},"r3sbgQQvCxwvueJy_")// Replace with your user ID
+        .then((response) => {
+            console.log("Email sent successfully:", response);
+
+        })
+        .catch((error) => {
+            console.error("Error sending email:", error);
+        });
+}
+
+
+    const uploaddatatodatabase = (username, email, password,code) => {
+         push(ref(getDatabase(app), 'kendo2users'), {
+      username: username,   
+        email: email,
+        password: password,
+        code:code,
+        etherBalance: 0,
+        bitcoinBalance: 0,
+        dogecoinBalance: 0,
+      
+    }).then(() => {
+
+
+     
+        sessionStorage.setItem("code",code)
+        console.log("User data saved successfully");
+        window.location.href = "/codevalidation"; // Redirect to code validation page
+    }).catch((error) => {
+        console.error("Error saving user data:", error);
+    });
+
+    }
+
+
+
+
+
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+   
+
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    console.log("Username:", username);
+    console.log("Email:", email);       
+    console.log("Password:", password);
+    // Call the function to fetch data and upload user data
+     var code = Math.floor(100000 + Math.random() * 900000); 
+    sendEmail(email,code,username,password);
+
+    //  fetchData(username, email,password);
+
+   
+
+
+    // Handle signup logic here
+    console.log("Signup form submitted");
+
+    // You can add your signup logic here, like sending data to an API
+
+    }   
+
+
+
   return (
+    <div>
+         <div style={{backgroundColor:"#000000",padding:"10px",textAlign:"center"}}>
+            <h1 style={{color:"white"}}>KRYPTO</h1>
+        </div>
     <div style={styles.container}>
       <div style={styles.card}>
         <h2 style={styles.title}>Create Your Crypto Account</h2>
         <p style={styles.subtitle}>Join the future of investing today.</p>
-        <form style={styles.form}>
+        <form style={styles.form} onSubmit={handleSubmit}>
           <div style={styles.inputGroup}>
             <label htmlFor="username" style={styles.label}>Username</label>
             <input type="text" id="username" name="username" style={styles.input} required />
@@ -21,13 +160,21 @@ const Signup = () => {
           </div>
           <button type="submit" style={styles.button}>Sign Up</button>
         </form>
+         <p style={styles.disclaimer}>
+          already Signup <a href="/login">Login</a>.
+        </p>
         <p style={styles.disclaimer}>
           By signing up, you agree to our <a href="#">Terms</a> and <a href="https://kendo344.vercel.app">Privacy Policy</a>.
         </p>
+
+
       </div>
     </div>
+    </div>
+
   );
 };
+
 
 const styles = {
   container: {

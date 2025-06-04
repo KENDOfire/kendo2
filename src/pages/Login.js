@@ -1,12 +1,78 @@
 import React from "react";
+import { getDatabase,ref,get } from "firebase/database";
+import { useEffect } from "react";
+import { useState } from "react";  
+import { initializeApp } from "firebase/app"; 
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBUTzEJBiB5XLkRHuG_mZTE5pgzXWfq6cs",
+  authDomain: "forces-91356.firebaseapp.com",
+  databaseURL: "https://forces-91356-default-rtdb.firebaseio.com",
+  projectId: "forces-91356",
+  storageBucket: "forces-91356.firebasestorage.app",
+  messagingSenderId: "141177010507",
+  appId: "1:141177010507:web:7fb6aa4b8345ce873750ce"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 const Login = () => {
+
+    const [data, setData] = useState([]);
+
+     const fetchData = async () => {
+      const db = getDatabase(app);
+      const usersRef = ref(db, 'kendo2users');
+    
+        // Fetch data from Firebase Realtime Database
+        const snapshot = await get(usersRef);
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const users = Object.values(data);
+          setData(users);
+    
+        
+    
+       
+        } 
+    };
+
+
+useEffect(() => {    
+    fetchData();
+  },[])
+
+
+   
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+    console.log("Username:", username);
+    console.log("Password:", password);
+    const user = data.find(user => user.username === username && user.password === password);
+    if (user) {
+      localStorage.setItem("isloggedin", "true");
+        window.location.href = "/dashboard"; // Redirect to dashboard after successful login
+    }
+    else {
+        alert("Invalid username or password. Please try again.");
+        }
+    }
+    
   return (
+    <div>    <div style={{backgroundColor:"#000000",padding:"10px",textAlign:"center"}}>
+            <h1 style={{color:"white"}}>KRYPTO</h1>
+        </div>
     <div style={styles.container}>
+        
+       
       <div style={styles.card}>
         <h2 style={styles.title}>Welcome Back</h2>
         <p style={styles.subtitle}>Log in to your crypto portfolio</p>
-        <form style={styles.form}>
+        <form style={styles.form} onSubmit={handleSubmit} >
           <div style={styles.inputGroup}>
             <label htmlFor="username" style={styles.label}>Username</label>
             <input type="text" id="username" name="username" style={styles.input} required />
@@ -22,6 +88,8 @@ const Login = () => {
         </p>
       </div>
     </div>
+    </div>
+
   );
 };
 

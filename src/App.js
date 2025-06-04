@@ -9,6 +9,24 @@ import Profile from "./pages/Profile";
 import History from "./pages/History";
 import Settings from "./pages/Settings";
 import Codevalidation from "./pages/Codevalidation";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBUTzEJBiB5XLkRHuG_mZTE5pgzXWfq6cs",
+  authDomain: "forces-91356.firebaseapp.com",
+  databaseURL: "https://forces-91356-default-rtdb.firebaseio.com",
+  projectId: "forces-91356",
+  storageBucket: "forces-91356.firebasestorage.app",
+  messagingSenderId: "141177010507",
+  appId: "1:141177010507:web:7fb6aa4b8345ce873750ce"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 

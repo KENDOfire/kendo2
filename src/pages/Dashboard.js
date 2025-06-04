@@ -1,7 +1,15 @@
 import React from "react";
 import Menu from "../components/Menu";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+    useEffect(() => {
+        document.title = "Kendo Crypto - Dashboard";
+        // You can add any additional setup here if needed
+        if (!localStorage.getItem("isloggedin")) {
+            window.location.href = "/login"; // Redirect to login if not logged in
+        }
+    }, []);
   return (
     <Menu>
       <div style={styles.container}>

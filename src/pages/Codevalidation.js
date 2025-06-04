@@ -1,15 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
+// import { useEffect } from "react";
+import { get,ref,getDatabase, } from "firebase/database";
 
 const Codevalidation = () => {
     var submitButton = document.getElementById("submit");
+
+
+
+
+    useEffect(() => {
+        sessionStorage.getItem("code");
+        const fetchData = async () => { 
+            const db = getDatabase();
+            const snapshot = await get(ref(db, 'kendo2users'));
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                console.log("Data fetched:", data);
+            } else {
+                console.log("No data available");
+            }
+        }
+        
+    },[])
        
 
   
 
     const handleSubmit = (e) => {
-          var codeInput = document.getElementById("code");
+         e.preventDefault();
 
- e.preventDefault();
+          var codeInput = document.getElementById("code");
+          sessionStorage.getItem("code");
+
+          if (codeInput.value !== sessionStorage.getItem("code")) {
+            alert("Invalid code. Please try again.");
+            return;
+          }else {
+            alert("Code validated successfully!");
+            localStorage.setItem("isloggedin", "true");
+            window.location.href = "/dashboard"; // Redirect to dashboard after successful validation
+        }
+
+
         // Handle code validation logic here
 
         var code = codeInput.value;
@@ -19,6 +51,11 @@ const Codevalidation = () => {
 
 
   return (
+    <div>
+         <div style={{backgroundColor:"#000000",padding:"10px",textAlign:"center"}}>
+            <h1 style={{color:"white"}}>KRYPTO</h1>
+        </div>
+    
     <div style={styles.container}>
       <div style={styles.card}>
         <h2 style={styles.title}>🔐 Code Validation</h2>
@@ -45,6 +82,7 @@ const Codevalidation = () => {
         </form>
       </div>
     </div>
+    </div>
   );
 };
 
@@ -58,7 +96,7 @@ const styles = {
     padding: "40px",
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     background:
-      "linear-gradient(135deg, #000000 30%, #1a1a1a 50%, #f35525 100%)",
+      "linear-gradient(135deg,rgb(4, 4, 4) 30%,rgb(124, 56, 56) 50%, #f35525 100%)",
   },
   card: {
     background: "#ffffff",

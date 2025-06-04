@@ -51,7 +51,9 @@ const Deposit = () => {
 const styles = {
   container: {
     minHeight: "100vh",
-    background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
+    // background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
+      background: "linear-gradient(135deg, #000000 30%, #1a1a1a 50%, #f35525 100%)",
+
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

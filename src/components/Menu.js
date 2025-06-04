@@ -34,9 +34,18 @@ const Menu = ({ children }) => {
 
       {/* Page Content */}
       <div style={styles.content}>
-        <button onClick={() => setOpen(!open)} style={styles.menuButton}>
+
+        <div style={{width:"100%",display:"flex",alignItems:"center"}}> 
+          <button onClick={() => setOpen(!open)} style={styles.menuButton}>
           ☰
         </button>
+
+        <div style={{ textAlign: "center", flex: 1 }}>
+    
+        <h1 style={{textAlign:'center',alignItems:"center",color:"white",verticalAlign:"middle"}}>Krypto</h1>
+        </div>
+        </div>
+       
         <div style={styles.pageContent}>{children}</div>
       </div>
     </div>
@@ -49,6 +58,8 @@ const styles = {
     minHeight: "100vh",
     overflowX: "hidden",
     padding: "0px",
+    background: "black",
+    borderBottom: "2px solid white",
   },
   sidebar: {
     position: "fixed",
@@ -104,7 +115,8 @@ const styles = {
     background: "none",
     border: "none",
     cursor: "pointer",
-    marginBottom: "20px",
+    // marginBottom: "20px",
+    color: "#fff",
   },
   pageContent: {
     paddingTop: "10px",
