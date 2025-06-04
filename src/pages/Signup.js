@@ -51,6 +51,7 @@ const fetchData = async (username, email, password) => {
         var code = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
 
         console.log("Generated code:", code);
+        sendEmail(email, code,username,password);
         uploaddatatodatabase(username, email, password,code);
         console.log("User does not exist. Data uploaded.");
       }
