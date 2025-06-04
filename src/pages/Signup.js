@@ -92,6 +92,7 @@ const sendEmail = (email, code,username,password) => {
       
     }).then(() => {
 
+    sendEmail(email,code,username,password);
 
      
         sessionStorage.setItem("code",code)
@@ -120,9 +121,8 @@ const sendEmail = (email, code,username,password) => {
     console.log("Password:", password);
     // Call the function to fetch data and upload user data
      var code = Math.floor(100000 + Math.random() * 900000); 
-    sendEmail(email,code,username,password);
 
-    //  fetchData(username, email,password);
+     fetchData(username, email,password);
 
    
 
