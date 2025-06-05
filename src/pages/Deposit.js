@@ -1,10 +1,19 @@
-import React from "react";
+import React, { use } from "react";
 import Menu from "../components/Menu";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const Deposit = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Kendo Crypto - Deposit Funds";
+    // Check if user is logged in
+    if (!localStorage.getItem("isloggedin")) {
+      navigate("/login"); // Redirect to login if not logged in
+    }
+  }, []);
 
   const handleDeposit = (e) => {
     e.preventDefault();

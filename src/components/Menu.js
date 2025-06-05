@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaTachometerAlt, FaMoneyCheckAlt, FaMoneyBillWave, FaUser, FaHistory, FaCog, FaSignOutAlt } from "react-icons/fa";
 
 const Menu = ({ children }) => {
   const [open, setOpen] = useState(false);
-
   const closeMenu = () => setOpen(false);
 
   return (
@@ -14,18 +14,36 @@ const Menu = ({ children }) => {
         <br />
         <h2 style={styles.logo}>Kendo Crypto</h2>
         <nav style={{ padding: "20px" }}>
-          <Link to="/dashboard" style={styles.link} onClick={closeMenu}>Dashboard</Link>
-          <Link to="/deposit" style={styles.link} onClick={closeMenu}>Deposit</Link>
-          <Link to="/withdraw" style={styles.link} onClick={closeMenu}>Withdraw</Link>
-          <Link to="/login" style={styles.link} onClick={closeMenu}>Logout</Link>
-          <Link to="/signup" style={styles.link} onClick={closeMenu}>Signup</Link>
-          <Link to="/login" style={styles.link} onClick={closeMenu}>Login</Link>
-          <Link to="/profile" style={styles.link} onClick={closeMenu}>Profile</Link>
-          <Link to="/history" style={styles.link} onClick={closeMenu}>History</Link>
-          <Link to="/settings" style={styles.link} onClick={closeMenu}>Settings</Link>
-
-
-
+          <Link to="/dashboard" style={styles.link} onClick={closeMenu}>
+            <FaTachometerAlt style={styles.icon} /> Dashboard
+          </Link>
+          <Link to="/deposit" style={styles.link} onClick={closeMenu}>
+            <FaMoneyCheckAlt style={styles.icon} /> Deposit
+          </Link>
+          <Link to="/withdraw" style={styles.link} onClick={closeMenu}>
+            <FaMoneyBillWave style={styles.icon} /> Withdraw
+          </Link>
+          <Link to="/profile" style={styles.link} onClick={closeMenu}>
+            <FaUser style={styles.icon} /> Profile
+          </Link>
+          <Link to="/history" style={styles.link} onClick={closeMenu}>
+            <FaHistory style={styles.icon} /> History
+          </Link>
+          <Link to="/settings" style={styles.link} onClick={closeMenu}>
+            <FaCog style={styles.icon} /> Settings
+          </Link>
+          <Link
+            to="/login"
+            style={styles.link}
+            onClick={() => {
+              localStorage.removeItem("isloggedin");
+              sessionStorage.removeItem("user");
+              window.location.href = "/login";
+              closeMenu();
+            }}
+          >
+            <FaSignOutAlt style={styles.icon} /> Logout
+          </Link>
         </nav>
       </div>
 
@@ -34,18 +52,12 @@ const Menu = ({ children }) => {
 
       {/* Page Content */}
       <div style={styles.content}>
-
-        <div style={{width:"100%",display:"flex",alignItems:"center"}}> 
-          <button onClick={() => setOpen(!open)} style={styles.menuButton}>
-          ☰
-        </button>
-
-        <div style={{ textAlign: "center", flex: 1 }}>
-    
-        <h1 style={{textAlign:'center',alignItems:"center",color:"white",verticalAlign:"middle"}}>Krypto</h1>
+        <div style={{ width: "100%", display: "flex", alignItems: "center" }}>
+          <button onClick={() => setOpen(!open)} style={styles.menuButton}>☰</button>
+          <div style={{ textAlign: "center", flex: 1 }}>
+            <h1 style={{ textAlign: 'center', color: "white" }}>Krypto</h1>
+          </div>
         </div>
-        </div>
-       
         <div style={styles.pageContent}>{children}</div>
       </div>
     </div>
@@ -90,11 +102,16 @@ const styles = {
     textAlign: "center",
   },
   link: {
-    display: "block",
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
     color: "#fff",
     textDecoration: "none",
     padding: "10px 0",
     borderBottom: "1px solid #444",
+  },
+  icon: {
+    minWidth: "20px",
   },
   overlay: {
     position: "fixed",
@@ -108,14 +125,13 @@ const styles = {
   content: {
     position: "relative",
     zIndex: 0,
-    padding:"0px",
+    padding: "0px",
   },
   menuButton: {
     fontSize: "50px",
     background: "none",
     border: "none",
     cursor: "pointer",
-    // marginBottom: "20px",
     color: "#fff",
   },
   pageContent: {

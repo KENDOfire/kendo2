@@ -64,7 +64,9 @@ useEffect(() => {
     }
     
   return (
-    <div>    <div style={{backgroundColor:"#000000",padding:"10px",textAlign:"center"}}>
+    <div> 
+        
+           <div style={{backgroundColor:"#000000",padding:"10px",textAlign:"center"}}>
             <h1 style={{color:"white"}}>KRYPTO</h1>
         </div>
     <div style={styles.container}>
