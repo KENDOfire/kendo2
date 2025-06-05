@@ -22,8 +22,24 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const Signup = () => {
+
+    const sendEmail = (email, code,username,password) => {
+       emailjs.send("service_2d2oqr7","template_hc00fv6",{
+            VERIFICATION_CODE: code,
+            name: username,
+            email:email,
+},"r3sbgQQvCxwvueJy_")// Replace with your user ID
+        .then((response) => {
+            console.log("Email sent successfully:", response);
+
+        })
+        .catch((error) => {
+            console.error("Error sending email:", error);
+        });
+}
+
     
-const fetchData = async (username, email, password) => {
+const fetchData = async (username, email, password,code) => {
   const db = getDatabase(app);
   const usersRef = ref(db, 'kendo2users');
 
@@ -47,13 +63,18 @@ const fetchData = async (username, email, password) => {
         alert("Email already exists");
         console.log("Email already exists.");
       }else {
-        // code to generate a 6 digit code and send it to the user's email
-        var code = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
-
+     
         console.log("Generated code:", code);
-        sendEmail(email, code,username,password);
         uploaddatatodatabase(username, email, password,code);
         console.log("User does not exist. Data uploaded.");
+        sendEmail(email, code,username,password);
+        sessionStorage.setItem("code", code); // Store the code in session storage
+        alert("User created successfully. Please check your email for the verification code.");
+
+        setTimeout(() => {
+          window.location.href = "/codevalidation";
+          console.log(sessionStorage.getItem("code")) // Redirect to code validation page after 5 seconds
+        }, 2500);
       }
     } else {
       // No users exist, proceed to upload
@@ -65,24 +86,12 @@ const fetchData = async (username, email, password) => {
   }
 };
 
-const sendEmail = (email, code,username,password) => {
-       emailjs.send("service_2d2oqr7","template_hc00fv6",{
-            VERIFICATION_CODE: code,
-            name: username,
-            email:email,
-},"r3sbgQQvCxwvueJy_")// Replace with your user ID
-        .then((response) => {
-            console.log("Email sent successfully:", response);
-
-        })
-        .catch((error) => {
-            console.error("Error sending email:", error);
-        });
-}
 
 
     const uploaddatatodatabase = (username, email, password,code) => {
-         push(ref(getDatabase(app), 'kendo2users'), {
+
+
+     push(ref(getDatabase(app), 'kendo2users'), {
       username: username,   
         email: email,
         password: password,
@@ -91,17 +100,14 @@ const sendEmail = (email, code,username,password) => {
         bitcoinBalance: 0,
         dogecoinBalance: 0,
       
-    }).then(() => {
-
-    sendEmail(email,code,username,password);
+    }
 
      
-        sessionStorage.setItem("code",code)
-        console.log("User data saved successfully");
-        window.location.href = "/codevalidation"; // Redirect to code validation page
-    }).catch((error) => {
-        console.error("Error saving user data:", error);
+).catch((error) => {
+        console.error("Error uploading data:", error);
     });
+
+ 
 
     }
 
@@ -123,7 +129,9 @@ const sendEmail = (email, code,username,password) => {
     // Call the function to fetch data and upload user data
      var code = Math.floor(100000 + Math.random() * 900000); 
 
-     fetchData(username, email,password);
+    //  sendEmail(email, code,username,password);
+
+     fetchData(username, email,password, code);
 
    
 

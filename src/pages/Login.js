@@ -54,6 +54,7 @@ useEffect(() => {
     console.log("Password:", password);
     const user = data.find(user => user.username === username && user.password === password);
     if (user) {
+        sessionStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("isloggedin", "true");
         window.location.href = "/dashboard"; // Redirect to dashboard after successful login
     }
