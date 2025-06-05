@@ -58,7 +58,7 @@ const Menu = ({ children }) => {
         <div style={{ width: "100%", display: "flex", alignItems: "center" }}>
           <button onClick={() => setOpen(!open)} style={styles.menuButton}>☰</button>
           <div style={{ textAlign: "center", flex: 1 }}>
-            <h1 style={{ textAlign: 'center', color: "white" }}>Krypto</h1>
+            <h1 style={{ textAlign: 'center', color: "white" }}><a style={{color:"white",textDecoration:"none"}} href="https://kendo344.vercel.app">Krypto</a></h1>
           </div>
         </div>
         <div style={styles.pageContent}>{children}</div>
