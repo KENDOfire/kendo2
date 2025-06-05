@@ -1,36 +1,90 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "../components/Menu";
+import { getDatabase, ref, get } from "firebase/database";
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBUTzEJBiB5XLkRHuG_mZTE5pgzXWfq6cs",
+    authDomain: "forces-91356.firebaseapp.com",
+    databaseURL: "https://forces-91356-default-rtdb.firebaseio.com",
+    projectId: "forces-91356",
+    storageBucket: "forces-91356.firebasestorage.app",
+    messagingSenderId: "141177010507",
+    appId: "1:141177010507:web:7fb6aa4b8345ce873750ce"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 
 const Profile = () => {
+
+    const fetchData = async () => {
+    const usersRef = ref(db, 'kendo2users');
+    const snapshot = await get(usersRef);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const users = Object.values(data);
+      const storedUser = sessionStorage.getItem("user");
+      if (storedUser) {
+        const currentUser = JSON.parse(storedUser);
+        const userData = users.find(user => user.username === currentUser.username);
+        return userData || {};
+        console.log("User data found:", userData);  
+
+      }
+
+      console.log("No user data found.");
+      return {};
+
+    }
+
+}
+
+fetchData().then(userData => {console.log("Fetched user data:", userData);})
+
+useEffect(() => {
+    document.title = "Kendo Crypto - Profile";
+    if (!localStorage.getItem("isloggedin")) {
+        window.location.href = "/login";
+        }
+}, []);
+useEffect(() => {
+    fetchData()
+}, []);
+
+
   return (
     <Menu>
       <div style={styles.container}>
         <div style={styles.card}>
           <h2 style={styles.title}>👤 User Profile</h2>
-          <p style={styles.subtitle}>Manage your account details and preferences.</p>
+          <p style={styles.subtitle}> account details and preferences.</p>
           <form style={styles.form}>
             <div style={styles.inputGroup}>
               <label htmlFor="username" style={styles.label}>Username</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Enter your username"
-                style={styles.input}
-                required
-              />
+              <h1 style={styles.input} id="username">
+                {sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")).username : "Loading..."}
+                </h1>
+
+            
             </div>
 
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                style={styles.input}
-                required
-              />
+              <h1 style={styles.input} id="email">
+                {sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")).email : "Loading..."}
+                </h1>
+             
+            </div>
+
+              <div style={styles.inputGroup}>
+              <label htmlFor="email" style={styles.label}>Password</label>
+              <h1 style={styles.input} id="Password">
+                {sessionStorage.getItem("user") ? "******" : "******"}
+                {/* {sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")).email : "Loading..."} */}
+                </h1>
+             
             </div>
 
             <button type="submit" style={styles.button}>Update Profile</button>

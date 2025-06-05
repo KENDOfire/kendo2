@@ -23,15 +23,18 @@ const Menu = ({ children }) => {
           <Link to="/withdraw" style={styles.link} onClick={closeMenu}>
             <FaMoneyBillWave style={styles.icon} /> Withdraw
           </Link>
+           <Link to="/history" style={styles.link} onClick={closeMenu}>
+            <FaHistory style={styles.icon} />Transaction History
+          </Link>
+           <Link to="/settings" style={styles.link} onClick={closeMenu}>
+            <FaCog style={styles.icon} /> Settings
+          </Link>
+           
           <Link to="/profile" style={styles.link} onClick={closeMenu}>
             <FaUser style={styles.icon} /> Profile
           </Link>
-          <Link to="/history" style={styles.link} onClick={closeMenu}>
-            <FaHistory style={styles.icon} /> History
-          </Link>
-          <Link to="/settings" style={styles.link} onClick={closeMenu}>
-            <FaCog style={styles.icon} /> Settings
-          </Link>
+        
+         
           <Link
             to="/login"
             style={styles.link}
