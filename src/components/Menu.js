@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTachometerAlt, FaMoneyCheckAlt, FaMoneyBillWave, FaUser, FaHistory, FaCog, FaSignOutAlt } from "react-icons/fa";
 
+
 const Menu = ({ children }) => {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
+
+
 
   return (
     <div style={styles.wrapper}>
@@ -32,6 +35,9 @@ const Menu = ({ children }) => {
            
           <Link to="/profile" style={styles.link} onClick={closeMenu}>
             <FaUser style={styles.icon} /> Profile
+          </Link>
+          <Link to="/privacy" style={styles.link} onClick={closeMenu}>
+            <FaUser style={styles.icon} /> privacy
           </Link>
         
          

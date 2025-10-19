@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Menu from "../components/Menu";
 import { getDatabase, ref, get } from "firebase/database";
 import { initializeApp } from "firebase/app";
+import { ScrollView } from "react";
+import Trading from "../components/Trading";
+import TradingViewWidget from "../components/Trading";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBUTzEJBiB5XLkRHuG_mZTE5pgzXWfq6cs",
@@ -71,18 +74,39 @@ const Dashboard = () => {
   return (
     <Menu>
       <div style={styles.container}>
-          <div style={styles.header}>
-          <h2 style={styles.title}>📊 Dashboard</h2>
-          <p style={styles.subtitle}>
-            Welcome back, {user.username}! Here's your crypto overview.
-          </p>
-        </div>
+   <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: '100%' }}>
+  {/* <p style={{ display: 'inline-block' }}>Scrollable content</p> */}
+  {/* More content */}
+  {/* <div style={styles.header}> */}
+    <div className="headerdiv1" style={styles.headerdiv1}>
+      <h2 style={styles.title}>📊 Dashboard</h2>
+      <p style={styles.subtitle}>
+        Welcome back, {user.username}! Here's your crypto overview.
+      </p>
+    </div>
+
+    <div className="headerdiv1" style={styles.headerdiv1}>
+      <h2 style={styles.title}>📊 Dashboard</h2>
+      <p style={styles.subtitle}>
+        Welcome back, {user.username}! Here's your crypto overview.
+      </p>
+    </div>
+
+  
+  {/* </div> */}
+</div>
+
+         
         <div style={styles.slider}>
           <div style={styles.slide}>
             <h3 style={styles.slideTitle}> {slides[slideIndex].title}: <span style={{color:"white"}}>{slides[slideIndex].value}</span></h3>
             
           </div>
         </div>
+        
+              <div style={{width:"100%", height:"100%",marginBottom:"40px"}}>
+    <TradingViewWidget />
+</div>
 
         <div style={styles.actionGrid}>
              <button  onClick={()=>{window.location.href="/deposit"}}  style={styles.actionButton}>📥 Deposit</button>
@@ -94,9 +118,12 @@ const Dashboard = () => {
           <button  onClick={()=>{window.location.href="/settings"}} style={styles.actionButton}>⚙️ Settings</button>
         </div>
 
+        
+
       
 
         <div style={styles.grid}>
+    
           <div style={styles.card}>
             <h3 style={styles.cardTitle}>Total Balance</h3>
             <p style={styles.cardValue}>$12,530.00</p>
@@ -176,6 +203,8 @@ const styles = {
   header: {
     textAlign: "center",
     marginBottom: "30px",
+    display: "flex",
+    flexWrap: "wrap",
   },
   title: {
     fontSize: "28px",
@@ -209,6 +238,13 @@ const styles = {
     fontWeight: "bold",
     color: "#ffffff",
   },
+  "headerdiv1": {
+    display: 'inline-block',
+     verticalAlign: 'top',
+     border: '2px solid red',
+     backgroundColor: '#333',
+},
+
 };
 
 export default Dashboard;
