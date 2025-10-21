@@ -3,8 +3,7 @@ import Menu from "../components/Menu";
 import { getDatabase, ref, get } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { ScrollView } from "react";
-import Trading from "../components/Trading";
-import TradingViewWidget from "../components/Trading";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBUTzEJBiB5XLkRHuG_mZTE5pgzXWfq6cs",
@@ -71,26 +70,37 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  // showing a minimal line-only BTC/USD iframe embed instead of the widget script
   return (
     <Menu>
       <div style={styles.container}>
-   <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: '100%' }}>
-  {/* <p style={{ display: 'inline-block' }}>Scrollable content</p> */}
-  {/* More content */}
-  {/* <div style={styles.header}> */}
-    <div className="headerdiv1" style={styles.headerdiv1}>
-      <h2 style={styles.title}>📊 Dashboard</h2>
-      <p style={styles.subtitle}>
-        Welcome back, {user.username}! Here's your crypto overview.
-      </p>
-    </div>
+        <div style={{ overflowX: "auto", whiteSpace: "nowrap", width: "100%" }}>
+          <div className="headerdiv1" style={styles.headerdiv1}>
+            {/* Minimal TradingView iframe — line-only BTC/USD, toolbars hidden */}
+            <iframe
+              title="BTCUSD-line"
+              src="https://s.tradingview.com/widgetembed/?frameElementId=tvchart&symbol=COINBASE:BTCUSD&interval=60&hidesidetoolbar=1&hide_top_toolbar=1&symboledit=0&saveimage=0&toolbarbg=transparent&withdateranges=0&showpopupbutton=0&hideideas=1&theme=dark&style=3&locale=en&overrides=%7B%22mainSeriesProperties%22%3A%7B%22style%22%3A3%2C%22color%22%3A%22%23f35525%22%7D%7D"
+              style={{
+                width: "100%",
+                height: "100%",
+                minWidth: "320px",
+                minHeight: "220px",
+                border: "none",
+                borderRadius: "10px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+                background: "#0b1220"
+              }}
+              allowTransparency={true}
+              scrolling="no"
+            />
+          </div>
 
-    <div className="headerdiv1" style={styles.headerdiv1}>
-      <h2 style={styles.title}>📊 Dashboard</h2>
-      <p style={styles.subtitle}>
-        Welcome back, {user.username}! Here's your crypto overview.
-      </p>
-    </div>
+          <div className="headerdiv1" style={styles.headerdiv1}>
+            <h2 style={styles.title}>📊 Dashboard</h2>
+            <p style={styles.subtitle}>
+              Welcome back, {user.username}! Here's your crypto overview.
+            </p>
+          </div>
 
   
   {/* </div> */}
@@ -105,7 +115,14 @@ const Dashboard = () => {
         </div>
         
               <div style={{width:"100%", height:"100%",marginBottom:"40px"}}>
-    <TradingViewWidget />
+       
+</div>
+
+<div>
+
+
+
+
 </div>
 
         <div style={styles.actionGrid}>
@@ -165,7 +182,7 @@ const styles = {
   slider: {
     backgroundColor: "#1e1e1e",
     padding: "5px",
-    borderRadius: "10px",
+    borderRadius: "10px", 
     marginBottom: "30px",
     textAlign: "center",
     boxShadow: "0 4px 10px rgba(0,0,0,0.4)",
@@ -209,7 +226,7 @@ const styles = {
   title: {
     fontSize: "28px",
     marginBottom: "6px",
-    color: "#f35525",
+    // color: "#f35525",
   },
   subtitle: {
     fontSize: "15px",
@@ -241,10 +258,15 @@ const styles = {
   "headerdiv1": {
     display: 'inline-block',
      verticalAlign: 'top',
-     border: '2px solid red',
-     backgroundColor: '#333',
+    //  border: '2px solid red',
+     background: "linear-gradient(135deg, #f35525 30%, #000000 30%, #1a1a1a 50% )",
+    //  padding: '2em',
+     minWidth: '300px',
+     minHeight: '200px',
+     margin: '15px',
+    //  boxShadow: '5px 5px 5px 3px rgba(255, 255, 255, 0.24)',
 },
+}
 
-};
 
 export default Dashboard;

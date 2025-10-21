@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaTachometerAlt, FaMoneyCheckAlt, FaMoneyBillWave, FaUser, FaHistory, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { FaTachometerAlt, FaMoneyCheckAlt, FaMoneyBillWave, FaUser, FaHistory, FaCog, FaSignOutAlt ,FaChartArea} from "react-icons/fa";
 
 
 const Menu = ({ children }) => {
@@ -26,6 +26,9 @@ const Menu = ({ children }) => {
           <Link to="/withdraw" style={styles.link} onClick={closeMenu}>
             <FaMoneyBillWave style={styles.icon} /> Withdraw
           </Link>
+            <Link to="/chart" style={styles.link} onClick={closeMenu}>
+            <FaChartArea style={styles.chart} /> Chart
+          </Link>
            <Link to="/history" style={styles.link} onClick={closeMenu}>
             <FaHistory style={styles.icon} />Transaction History
           </Link>
@@ -37,8 +40,9 @@ const Menu = ({ children }) => {
             <FaUser style={styles.icon} /> Profile
           </Link>
           <Link to="/privacy" style={styles.link} onClick={closeMenu}>
-            <FaUser style={styles.icon} /> privacy
+            <FaUser style={styles.icon} /> Privacy
           </Link>
+         
         
          
           <Link
@@ -107,7 +111,7 @@ const styles = {
   logo: {
     marginTop: "40px",
     marginBottom: "30px",
-    fontSize: "22px",
+    fontSize: "19px",
     textAlign: "center",
   },
   link: {

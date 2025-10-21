@@ -10,6 +10,7 @@ import History from "./pages/History";
 import Settings from "./pages/Settings";
 import Codevalidation from "./pages/Codevalidation";
 import PrivacyPolicy from "./pages/privacy";
+import Chart from "./pages/Chart";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -46,6 +47,8 @@ export default function App() {
         | <Link to="/settings">Settings</Link>
         | <Link to="/codevalidation">Code Validation</Link>
         | <Link to="/privacy">Privacy Policy</Link>
+        | <Link to="/chart"> Chart</Link>
+
 
         
         
@@ -63,6 +66,9 @@ export default function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/codevalidation" element={<Codevalidation />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        {/* <Route path="/privacy" element={<PrivacyPolicy />} /> */}
+
+        <Route path="/chart" element={<Chart />} />
 
         
         {/* Add more routes as needed */}
